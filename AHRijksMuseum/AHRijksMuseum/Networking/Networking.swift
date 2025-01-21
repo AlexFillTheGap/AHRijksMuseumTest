@@ -1,14 +1,11 @@
 import Foundation
 
-// API used for the example: https://data.rijksmuseum.nl/object-metadata/api/
-
 protocol Networking: Sendable {
     func performRequest(with route: NetworkRoute) async throws -> Data
 }
 
 struct NetworkManager: Networking {
     private let urlSession = URLSession.shared
-    private let baseUrl: String = "https://data.rijksmuseum.nl/object-metadata/api/"
     private let apiKey: String = "0fiuZFh4"
 
     public static let shared = NetworkManager()
@@ -63,7 +60,7 @@ protocol NetworkRoute {
 // Common to all Services
 extension NetworkRoute {
     var baseUrl: String {
-        "https://data.rijksmuseum.nl/object-metadata/api/"
+        "https://www.rijksmuseum.nl/api"
     }
 
     var headers: [String: String] {

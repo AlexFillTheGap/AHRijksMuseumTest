@@ -6,6 +6,7 @@ protocol ArtServicesProtocol: Sendable {
 
 final class ArtServices: ArtServicesProtocol {
     private let numberOfResultsPerPage = 20
+    private let networkManager = NetworkManager()
 
     func fetchArts(page: Int) async throws -> [ArtHomeModel] {
         do {
@@ -26,16 +27,13 @@ private enum ArtRoutes: NetworkRoute {
     case fetchArts(page: Int, numberResults: Int)
 
     var path: String {
-        switch self {
-        case .fetchArts:
-            return "/api/en/collection"
-        }
+        "/api/en/collection"
     }
 
     var queryItems: [String: Any] {
         switch self {
         case .fetchArts(let page, let numberResults):
-            return [
+            [
                 "p": page,
                 "ps": numberResults
             ]

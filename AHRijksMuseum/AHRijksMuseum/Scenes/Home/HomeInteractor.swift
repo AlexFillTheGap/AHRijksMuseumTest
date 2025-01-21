@@ -22,6 +22,15 @@ actor HomeInteractor: HomeRequests, HomeDataStore {
     }
 
     func doLoadData(request: HomeLoadData.Request) async {
-        await responses.presentDataLoaded(response: HomeLoadData.Response(arts: []))
+        do {
+            let requestResult = try await artService.fetchArts(page: actualPage)
+            arts.append(requestResult)
+            await responses.presentDataLoaded(response: HomeLoadData.Response(arts: requestResult))
+        } catch let error as NetworkError {
+            // TODO: Present error.
+        } catch {
+            print("an error happens during doLoadData method")
+        }
+
     }
 }

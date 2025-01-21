@@ -13,6 +13,30 @@ enum HomeLoadData {
     }
 }
 
+enum HomeLoadNextPage {
+    struct Request {
+    }
+
+    struct Response {
+        let arts: [ArtHomeModel]
+    }
+
+    struct View {
+        let arts: [ItemViewModel]
+    }
+}
+
+enum HomeError {
+    struct Response {
+        let error: NetworkError
+    }
+
+    struct View {
+        let errorTitle: String
+        let errorMessage: String
+    }
+}
+
 struct ItemViewModel {
     let imageUrlString: String
     let title: String

@@ -2,10 +2,11 @@ import Foundation
 
 protocol HomeRequests {
     func doLoadData(request: HomeLoadData.Request) async
+    func doLoadNextPage(request: HomeLoadNextPage.Request) async
 }
 
-protocol HomeDataStore: AnyObject {
-    var arts: [[ArtHomeModel]] { get async }
+protocol HomeDataStore: Actor {
+    var arts: [[ArtHomeModel]] { get set }
 }
 
 actor HomeInteractor: HomeRequests, HomeDataStore {
@@ -27,10 +28,29 @@ actor HomeInteractor: HomeRequests, HomeDataStore {
             arts.append(requestResult)
             await responses.presentDataLoaded(response: HomeLoadData.Response(arts: requestResult))
         } catch let error as NetworkError {
-            // TODO: Present error.
+            await responses.presentError(response: HomeError.Response(error: error))
         } catch {
             print("an error happens during doLoadData method")
         }
+    }
 
+    func doLoadNextPage(request: HomeLoadNextPage.Request) async {
+        guard !loadingNextPage else {
+            return
+        }
+        loadingNextPage = true
+        actualPage += 1
+        do {
+            let requestResult = try await artService.fetchArts(page: actualPage)
+            arts.append(requestResult)
+            await responses.presentNextPage(response: HomeLoadNextPage.Response(arts: requestResult))
+            loadingNextPage = false
+        } catch let error as NetworkError {
+            actualPage -= 1
+            loadingNextPage = false
+            await responses.presentError(response: HomeError.Response(error: error))
+        } catch {
+            print("an error happens during doLoadNextPage method")
+        }
     }
 }

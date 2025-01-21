@@ -4,6 +4,8 @@ import UIKit
 @MainActor
 protocol HomeView: Sendable {
     func displayNewData(view: HomeLoadData.View)
+    func displayNextPage(view: HomeLoadNextPage.View)
+    func displayError(view: HomeError.View)
 }
 
 @MainActor
@@ -79,6 +81,29 @@ extension HomeViewController: HomeView {
             self.collectionView.reloadData()
         }
     }
+
+    func displayNextPage(view: HomeLoadNextPage.View) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.collectionItems.append(view.arts)
+            self.collectionView.performBatchUpdates {
+                self.collectionView.insertSections([self.collectionItems.count - 1])
+            }
+        }
+    }
+
+    func displayError(view: HomeError.View) {
+        DispatchQueue.main.async {
+            self.loaderView.isHidden = true
+            let alertController = UIAlertController(
+                title: view.errorTitle,
+                message: view.errorMessage,
+                preferredStyle: .alert
+            )
+            alertController.addAction(UIAlertAction(title: String(localized: "home_error_ok_button"), style: .default))
+            self.present(alertController, animated: true)
+        }
+    }
 }
 
 // MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -136,6 +161,27 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 assert(false, "Unexpected element kind")
             }
     }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let homeRouter = router
+        Task {
+            await homeRouter?.goToMoreInfo(indexPath: indexPath)
+        }
+    }
+
+    // With this method we can inspect the scroll possition on the collection and
+    // we can check if we are in the half of the content to try dowload extra pages.
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentHeight = scrollView.contentSize.height
+        let contentYOffset = scrollView.contentOffset.y
+
+        if contentYOffset > contentHeight / 2 {
+            let interactor = requests
+            Task {
+                await interactor?.doLoadNextPage(request: HomeLoadNextPage.Request())
+            }
+        }
+    }
 }
 
 // MARK: - UI
@@ -150,7 +196,10 @@ private enum Views {
 
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
-        collectionView.register(HomeCollectionCell.self, forCellWithReuseIdentifier: HomeCollectionCell.reuseIdentifier)
+        collectionView.register(
+            HomeCollectionCell.self,
+            forCellWithReuseIdentifier: HomeCollectionCell.reuseIdentifier
+        )
         collectionView.register(
             HomeCollectionHeaderView.self,
             forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,

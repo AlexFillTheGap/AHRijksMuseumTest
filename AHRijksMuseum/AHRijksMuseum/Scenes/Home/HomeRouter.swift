@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 
 protocol HomeRouting {
-    func goToMoreInfo(indexPath: IndexPath)
+    func goToMoreInfo(indexPath: IndexPath) async
 }
 
 protocol HomeDataPassing {
@@ -18,5 +18,6 @@ final class HomeRouter: HomeRouting, HomeDataPassing {
         self.dataStore = dataStore
     }
 
-    func goToMoreInfo(indexPath: IndexPath) { }
+    @MainActor
+    func goToMoreInfo(indexPath: IndexPath) async { }
 }

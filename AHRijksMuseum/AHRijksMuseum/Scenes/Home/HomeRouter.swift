@@ -19,5 +19,17 @@ final class HomeRouter: HomeRouting, HomeDataPassing {
     }
 
     @MainActor
-    func goToMoreInfo(indexPath: IndexPath) async { }
+    func goToMoreInfo(indexPath: IndexPath) async {
+        guard
+            let navigationController = viewController?.navigationController,
+            await indexPath.section < dataStore.arts.count,
+            await indexPath.row < dataStore.arts[indexPath.section].count
+        else { return }
+
+        let destinationVC = MoreInfoViewController(nibName: nil, bundle: nil)
+        let artHome = await dataStore.arts[indexPath.section][indexPath.row]
+        let moreInfoDetails = MoreInfoModel(from: artHome)
+        await destinationVC.router?.dataStore.setArt(art: moreInfoDetails)
+        navigationController.pushViewController(destinationVC, animated: true)
+    }
 }

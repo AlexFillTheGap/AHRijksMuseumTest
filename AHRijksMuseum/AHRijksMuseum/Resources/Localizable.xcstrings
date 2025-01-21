@@ -150,6 +150,16 @@
           }
         }
       }
+    },
+    "home_section_header_title" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Section %d"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

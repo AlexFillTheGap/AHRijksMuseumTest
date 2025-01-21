@@ -9,7 +9,7 @@ protocol HomeDataStore: AnyObject {
 }
 
 actor HomeInteractor: HomeRequests, HomeDataStore {
-    var actualPage = 1
+    var actualPage = 0
     private let responses: HomeResponses
     private let artService: ArtServicesProtocol
     private var loadingNextPage = false

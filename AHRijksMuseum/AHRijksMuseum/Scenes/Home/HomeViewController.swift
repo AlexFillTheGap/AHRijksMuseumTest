@@ -31,6 +31,7 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         let interactor = requests
+        loaderView.isHidden = false
         Task {
             await interactor?.doLoadData(request: HomeLoadData.Request())
         }
@@ -108,6 +109,33 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return homeCell
     }
 
+    func collectionView(
+        _ collectionView: UICollectionView,
+        viewForSupplementaryElementOfKind kind: String,
+        at indexPath: IndexPath
+    ) -> UICollectionReusableView {
+            switch kind {
+            case UICollectionView.elementKindSectionHeader:
+                let view = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: HomeCollectionHeaderView.reuseIdentifier,
+                    for: indexPath
+                )
+                guard let headerView = view as? HomeCollectionHeaderView else {
+                    return view
+                }
+
+                headerView.configure(
+                    title: String(
+                        format: String(localized: "home_section_header_title"),
+                        indexPath.section + 1
+                    )
+                )
+                return headerView
+            default:
+                assert(false, "Unexpected element kind")
+            }
+    }
 }
 
 // MARK: - UI
@@ -123,6 +151,11 @@ private enum Views {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
 
         collectionView.register(HomeCollectionCell.self, forCellWithReuseIdentifier: HomeCollectionCell.reuseIdentifier)
+        collectionView.register(
+            HomeCollectionHeaderView.self,
+            forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+            withReuseIdentifier: HomeCollectionHeaderView.reuseIdentifier
+        )
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }

@@ -1,16 +1,18 @@
 import Foundation
 import UIKit
 
-protocol HomeView {
+@MainActor
+protocol HomeView: Sendable {
     func displayNewData(view: HomeLoadData.View)
 }
 
+@MainActor
 final class HomeViewController: UIViewController {
     private var requests: HomeRequests?
     var router: (HomeRouting & HomeDataPassing)?
 
     private let loaderView = UIActivityIndicatorView.loaderView()
-    
+
     private var collectionItems: [[ItemViewModel]] = []
 
     // MARK: Init
@@ -27,7 +29,10 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-        print("Home")
+        let interactor = requests
+        Task {
+            await interactor?.doLoadData(request: HomeLoadData.Request())
+        }
     }
 
     // MARK: Private Methods
@@ -47,7 +52,7 @@ final class HomeViewController: UIViewController {
 
 // MARK: - HomeView
 
-extension HomeViewController: @preconcurrency HomeView {
+extension HomeViewController: HomeView {
     func displayNewData(view: HomeLoadData.View) {
 
     }

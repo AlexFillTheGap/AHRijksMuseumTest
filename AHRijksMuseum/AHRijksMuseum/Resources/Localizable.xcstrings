@@ -1,8 +1,155 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "error_description_fetch_list" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We can’t get the art details"
+          }
+        }
+      }
+    },
+    "error_description_server" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Server error"
+          }
+        }
+      }
+    },
+    "error_nt_auth_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "auth error"
+          }
+        }
+      }
+    },
+    "error_nt_bad_url_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "bad url error"
+          }
+        }
+      }
+    },
+    "error_nt_client_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "client error"
+          }
+        }
+      }
+    },
+    "error_nt_connection_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "connection error"
+          }
+        }
+      }
+    },
+    "error_nt_no_data_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "no data error"
+          }
+        }
+      }
+    },
+    "error_nt_parse_data_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "error parsing data"
+          }
+        }
+      }
+    },
+    "error_nt_server_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "server error"
+          }
+        }
+      }
+    },
+    "error_nt_unknown_message" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown error"
+          }
+        }
+      }
+    },
+    "error_reason_fetch_list" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error happens when we try to get the art list"
+          }
+        }
+      }
+    },
+    "error_reason_server" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "There is a problem with server"
+          }
+        }
+      }
+    },
+    "error_suggestion_fetch_list" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try to get connectivity or try later"
+          }
+        }
+      }
+    },
+    "error_suggestion_server" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact administrator or try later!"
+          }
+        }
+      }
+    },
     "home_screen_title" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home artwork list"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

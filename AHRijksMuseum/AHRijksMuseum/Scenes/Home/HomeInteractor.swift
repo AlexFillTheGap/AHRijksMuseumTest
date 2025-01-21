@@ -4,11 +4,11 @@ protocol HomeRequests {
     func doLoadData(request: HomeLoadData.Request) async
 }
 
-protocol HomeDataStore {
-    var arts: [[ArtHomeModel]] { get set }
+protocol HomeDataStore: AnyObject {
+    var arts: [[ArtHomeModel]] { get async }
 }
 
-final class HomeInteractor: HomeRequests, HomeDataStore {
+actor HomeInteractor: HomeRequests, HomeDataStore {
     var actualPage = 1
     private let responses: HomeResponses
     private let artService: ArtServicesProtocol
@@ -22,6 +22,6 @@ final class HomeInteractor: HomeRequests, HomeDataStore {
     }
 
     func doLoadData(request: HomeLoadData.Request) async {
-        responses.presentDataLoaded(response: HomeLoadData.Response(arts: []))
+        await responses.presentDataLoaded(response: HomeLoadData.Response(arts: []))
     }
 }

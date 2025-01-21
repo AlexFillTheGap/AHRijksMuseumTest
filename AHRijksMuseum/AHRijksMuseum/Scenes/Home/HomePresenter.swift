@@ -1,7 +1,7 @@
 import Foundation
 
-protocol HomeResponses {
-    func presentDataLoaded(response: HomeLoadData.Response)
+protocol HomeResponses: Sendable {
+    func presentDataLoaded(response: HomeLoadData.Response) async
 }
 
 final class HomePresenter: HomeResponses {
@@ -11,11 +11,11 @@ final class HomePresenter: HomeResponses {
         view = homeView
     }
 
-    func presentDataLoaded(response: HomeLoadData.Response) {
+    func presentDataLoaded(response: HomeLoadData.Response) async {
         let items = response.arts.map { model in
             ItemViewModel(imageUrlString: model.listImageUrlString, title: model.listTitle)
         }
-        view.displayNewData(view: HomeLoadData.View(arts: items))
+        await view.displayNewData(view: HomeLoadData.View(arts: items))
     }
 
 }

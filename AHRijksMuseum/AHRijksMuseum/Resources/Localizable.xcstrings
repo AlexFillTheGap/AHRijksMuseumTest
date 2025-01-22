@@ -1,6 +1,16 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
+    "error_description_fetch_detail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We can’t get the art details"
+          }
+        }
+      }
+    },
     "error_description_fetch_list" : {
       "localizations" : {
         "en" : {
@@ -101,6 +111,16 @@
         }
       }
     },
+    "error_reason_fetch_detail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An error happening when we try to get the art details"
+          }
+        }
+      }
+    },
     "error_reason_fetch_list" : {
       "localizations" : {
         "en" : {
@@ -117,6 +137,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "There is a problem with server"
+          }
+        }
+      }
+    },
+    "error_suggestion_fetch_detail" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try to get connectivity or try later"
           }
         }
       }

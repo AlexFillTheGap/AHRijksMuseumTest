@@ -3,6 +3,7 @@ import UIKit
 
 protocol MoreInfoResponses: Sendable {
     func presentLoadedData(response: MoreInfoInitialData.Response) async
+    func presentRemoteData(response: MoreInfoRemoteData.Response) async
 }
 
 final class MoreInfoPresenter: MoreInfoResponses {
@@ -19,5 +20,14 @@ final class MoreInfoPresenter: MoreInfoResponses {
             title: response.artMoreInfo.title
         )
         await view.displayLoadedData(view: MoreInfoInitialData.View(artViewModel: artViewModel))
+    }
+
+    func presentRemoteData(response: MoreInfoRemoteData.Response) async {
+        let artViewModel = MoreInfoRemoteViewModel(
+            title: response.artMoreInfo.screenTitle,
+            description: response.artMoreInfo.description,
+            imageBackgroundColor: UIColor(response.artMoreInfo.imageBackgroundColorString)
+        )
+        await view.displayRemoteData(view: MoreInfoRemoteData.View(artViewModel: artViewModel))
     }
 }

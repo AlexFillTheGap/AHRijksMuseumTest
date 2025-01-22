@@ -2,6 +2,7 @@ import Foundation
 
 protocol MoreInfoRequests {
     func doLoadInitialData(request: MoreInfoInitialData.Request) async
+    func doLoadRemoteData(request: MoreInfoRemoteData.Request) async
 }
 
 protocol MoreInfoDataStore: Actor {
@@ -22,6 +23,19 @@ actor MoreInfoInteractor: MoreInfoRequests, MoreInfoDataStore {
     func doLoadInitialData(request: MoreInfoInitialData.Request) async {
         guard let art else { return }
         await responses.presentLoadedData(response: MoreInfoInitialData.Response(artMoreInfo: art))
+    }
+
+    func doLoadRemoteData(request: MoreInfoRemoteData.Request) async {
+        guard let art else { return }
+        do {
+            let requestResult = try await artService.fetchArtDetail(artId: art.identifier)
+            self.art = requestResult
+            await responses.presentRemoteData(response: MoreInfoRemoteData.Response(artMoreInfo: requestResult))
+        } catch let error as NetworkError {
+           // TODO: DISPLAY AN ERROR
+        } catch {
+            print("an error happens during doLoadRemoteData method")
+        }
     }
 
     func setArt(art: MoreInfoModel) async {

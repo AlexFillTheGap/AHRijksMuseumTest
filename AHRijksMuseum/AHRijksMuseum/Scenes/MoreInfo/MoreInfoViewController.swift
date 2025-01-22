@@ -2,6 +2,7 @@ import UIKit
 
 protocol MoreInfoView: Sendable {
     func displayLoadedData(view: MoreInfoInitialData.View) async
+    func displayRemoteData(view: MoreInfoRemoteData.View) async
 }
 
 class MoreInfoViewController: UIViewController {
@@ -42,6 +43,7 @@ class MoreInfoViewController: UIViewController {
         loaderView.isHidden = false
         Task {
             await requests?.doLoadInitialData(request: MoreInfoInitialData.Request())
+            await requests?.doLoadRemoteData(request: MoreInfoRemoteData.Request())
         }
     }
 
@@ -95,6 +97,17 @@ extension MoreInfoViewController: MoreInfoView {
                     },
                     completion: nil
                 )
+            }
+        }
+    }
+
+    func displayRemoteData(view: MoreInfoRemoteData.View) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.loaderView.isHidden = true
+                self.imageView.backgroundColor = view.artViewModel.imageBackgroundColor
+                self.descriptionLabel.text = view.artViewModel.description
+                self.title = view.artViewModel.title
             }
         }
     }

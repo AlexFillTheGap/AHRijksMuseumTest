@@ -14,7 +14,6 @@ actor HomeInteractor: HomeRequests, HomeDataStore {
     var actualPage = 0
     private let responses: HomeResponses
     private let artService: ArtServicesProtocol
-    private var loadingNextPage = false
 
     var arts: [[ArtHomeModel]] = []
 
@@ -28,30 +27,25 @@ actor HomeInteractor: HomeRequests, HomeDataStore {
             let requestResult = try await artService.fetchArts(page: actualPage)
             arts.append(requestResult)
             await responses.presentDataLoaded(response: HomeLoadData.Response(arts: requestResult))
-        } catch let error as NetworkError {
+        } catch let error as ArtServiceError {
             await responses.presentError(response: HomeError.Response(error: error))
         } catch {
-            print("an error happens during doLoadData method")
+            await responses.presentError(response: HomeError.Response(error: .unknown))
         }
     }
 
     func doLoadNextPage(request: HomeLoadNextPage.Request) async {
-        guard !loadingNextPage else {
-            return
-        }
-        loadingNextPage = true
         actualPage += 1
         do {
             let requestResult = try await artService.fetchArts(page: actualPage)
             arts.append(requestResult)
             await responses.presentNextPage(response: HomeLoadNextPage.Response(arts: requestResult))
-            loadingNextPage = false
-        } catch let error as NetworkError {
+        } catch let error as ArtServiceError {
             actualPage -= 1
-            loadingNextPage = false
             await responses.presentError(response: HomeError.Response(error: error))
         } catch {
-            print("an error happens during doLoadNextPage method")
+            actualPage -= 1
+            await responses.presentError(response: HomeError.Response(error: .unknown))
         }
     }
 

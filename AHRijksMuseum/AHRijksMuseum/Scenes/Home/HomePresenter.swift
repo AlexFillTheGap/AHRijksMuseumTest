@@ -32,7 +32,7 @@ final class HomePresenter: HomeResponses {
             errorTitle: String(
                 localized: "home_error_title"
             ),
-            errorMessage: response.error.message
+            errorMessage: response.error.errorDescription ?? ""
         )
         await view.displayError(view: viewModel)
     }

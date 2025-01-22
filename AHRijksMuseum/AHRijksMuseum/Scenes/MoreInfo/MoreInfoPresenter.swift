@@ -33,10 +33,10 @@ final class MoreInfoPresenter: MoreInfoResponses {
     }
 
     func presentError(response: MoreInfoError.Response) async {
-        let viewModel = MoreInfoError.View(
+        let errorViewModel = MoreInfoError.View(
             errorTitle: String(localized: "moreInfo_error_title"),
-            errorMessage: response.error.message
+            errorMessage: response.error.errorDescription ?? ""
         )
-        await view.displayError(view: viewModel)
+        await view.displayError(view: errorViewModel)
     }
 }

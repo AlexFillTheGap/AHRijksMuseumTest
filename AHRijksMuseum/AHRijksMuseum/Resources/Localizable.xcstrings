@@ -31,6 +31,16 @@
         }
       }
     },
+    "error_description_unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "An unknown error happen"
+          }
+        }
+      }
+    },
     "error_nt_auth_message" : {
       "localizations" : {
         "en" : {
@@ -141,6 +151,16 @@
         }
       }
     },
+    "error_reason_unknown" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown error"
+          }
+        }
+      }
+    },
     "error_suggestion_fetch_detail" : {
       "localizations" : {
         "en" : {
@@ -162,6 +182,16 @@
       }
     },
     "error_suggestion_server" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact administrator or try later!"
+          }
+        }
+      }
+    },
+    "error_suggestion_unknown" : {
       "localizations" : {
         "en" : {
           "stringUnit" : {

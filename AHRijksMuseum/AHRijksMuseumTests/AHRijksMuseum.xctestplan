@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "1F7774D1-B2D5-4C2D-ABB4-FCD8CD0663D4",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:AHRijksMuseum.xcodeproj",
+      "identifier" : "C17D72462D3EB33700EC625D",
+      "name" : "AHRijksMuseum"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:AHRijksMuseum.xcodeproj",
+        "identifier" : "C17D725C2D3EB33900EC625D",
+        "name" : "AHRijksMuseumTests"
+      }
+    }
+  ],
+  "version" : 1
+}

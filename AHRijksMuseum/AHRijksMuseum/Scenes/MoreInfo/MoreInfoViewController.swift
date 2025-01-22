@@ -84,73 +84,70 @@ class MoreInfoViewController: UIViewController {
 
 extension MoreInfoViewController: MoreInfoView {
     func displayLoadedData(view: MoreInfoInitialData.View) {
-        DispatchQueue.main.async {
-            self.title = view.artViewModel.screenTitle
-            self.titleLabel.text = view.artViewModel.title
-            Task {
-                let (image, _) = await ImageCache.shared.load(urlString: view.artViewModel.imageUrlString)
-                UIView.transition(
-                    with: self.imageView,
-                    duration: 0.3,
-                    options: .transitionCrossDissolve,
-                    animations: {
-                        self.imageView.image = image
-                    },
-                    completion: nil
-                )
-            }
+        title = view.artViewModel.screenTitle
+        titleLabel.text = view.artViewModel.title
+        Task {
+            let (image, _) = await ImageCache.shared.load(urlString: view.artViewModel.imageUrlString)
+            UIView.transition(
+                with: imageView,
+                duration: 0.3,
+                options: .transitionCrossDissolve,
+                animations: {
+                    self.imageView.image = image
+                },
+                completion: nil
+            )
         }
     }
 
     func displayRemoteData(view: MoreInfoRemoteData.View) {
-        DispatchQueue.main.async {
-            UIView.animate(withDuration: 0.3) {
-                self.loaderView.isHidden = true
-                self.imageView.backgroundColor = view.artViewModel.imageBackgroundColor
-                self.descriptionLabel.text = view.artViewModel.description
-                self.title = view.artViewModel.title
-            }
+        title = view.artViewModel.title
+        descriptionLabel.text = view.artViewModel.description
+        UIView.animate(withDuration: 0.3) {
+            self.loaderView.isHidden = true
+            self.imageView.backgroundColor = view.artViewModel.imageBackgroundColor
         }
     }
 
     func displayError(view: MoreInfoError.View) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(
-                title: view.errorTitle,
-                message: view.errorMessage,
-                preferredStyle: .alert
+        let alertController = UIAlertController(
+            title: view.errorTitle,
+            message: view.errorMessage,
+            preferredStyle: .alert
+        )
+        alertController.addAction(
+            UIAlertAction(
+                title: String(localized: "moreInfo_error_ok_button"),
+                style: .default,
+                handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                }
             )
-            alertController.addAction(
-                UIAlertAction(
-                    title: String(localized: "moreInfo_error_ok_button"),
-                    style: .default,
-                    handler: { _ in
-                        self.navigationController?.popViewController(animated: true)
-                    }
-                )
-            )
-            self.present(alertController, animated: true)
-        }
+        )
+        self.present(alertController, animated: true)
     }
 }
 
 // MARK: - UI
 
 private enum Views {
-    @MainActor static func scrollView() -> UIScrollView {
+    @MainActor
+    static func scrollView() -> UIScrollView {
         let scroll = UIScrollView()
         scroll.translatesAutoresizingMaskIntoConstraints = false
         return scroll
     }
 
-    @MainActor static func imageView() -> UIImageView {
+    @MainActor
+    static func imageView() -> UIImageView {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }
 
-    @MainActor static func titleLabel() -> UILabel {
+    @MainActor
+    static func titleLabel() -> UILabel {
         let title = UILabel()
         title.font = UIFont.boldSystemFont(ofSize: 20)
         title.numberOfLines = 0
@@ -159,7 +156,8 @@ private enum Views {
         return title
     }
 
-    @MainActor static func descriptionLabel() -> UILabel {
+    @MainActor
+    static func descriptionLabel() -> UILabel {
         let description = UILabel()
         description.numberOfLines = 0
         description.lineBreakMode = .byClipping

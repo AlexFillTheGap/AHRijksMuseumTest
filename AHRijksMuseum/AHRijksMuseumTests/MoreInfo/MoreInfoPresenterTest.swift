@@ -66,13 +66,13 @@ final class MoreInfoPresenterTest: XCTestCase {
     func testPresentError() async {
         // Given
         let sut = MoreInfoPresenter(moreInfoView: moreInfoViewMock)
-
+        let unknownError = ArtServiceError.unknown
         // When
-        await sut.presentError(response: MoreInfoError.Response(error: NetworkError.server))
+        await sut.presentError(response: MoreInfoError.Response(error: unknownError))
 
         // Then
         let displayed = await moreInfoViewMock.displayError
         XCTAssertNotNil(displayed)
-        XCTAssertEqual(displayed?.errorMessage, NetworkError.server.message)
+        XCTAssertEqual(displayed?.errorMessage, unknownError.errorDescription)
     }
 }

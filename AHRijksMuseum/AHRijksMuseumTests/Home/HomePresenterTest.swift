@@ -55,15 +55,16 @@ final class HomePresenterTest: XCTestCase {
     func testPresentError() async {
         // Given
         homeViewMock = await MockHomeView()
-        let error = NetworkError.noData
         let sut = HomePresenter(homeView: homeViewMock)
+        let unknownError = ArtServiceError.unknown
 
         // When
-        let response = HomeError.Response(error: error)
+        let response = HomeError.Response(error: unknownError)
         await sut.presentError(response: response)
 
         // Then
         let displayed = await homeViewMock.displayErrorView
         XCTAssertNotNil(displayed)
+        XCTAssertEqual(displayed?.errorMessage, unknownError.errorDescription)
     }
 }

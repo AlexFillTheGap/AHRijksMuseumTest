@@ -14,19 +14,12 @@
 			remoteGlobalIDString = C17D72462D3EB33700EC625D;
 			remoteInfo = AHRijksMuseum;
 		};
-		C17D72682D3EB33A00EC625D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = C17D723F2D3EB33700EC625D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = C17D72462D3EB33700EC625D;
-			remoteInfo = AHRijksMuseum;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C12FC2632D41612C002CF995 /* AHRijksMuseum.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = AHRijksMuseum.xctestplan; path = AHRijksMuseumTests/AHRijksMuseum.xctestplan; sourceTree = "<group>"; };
 		C17D72472D3EB33700EC625D /* AHRijksMuseum.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AHRijksMuseum.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C17D725D2D3EB33900EC625D /* AHRijksMuseumTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHRijksMuseumTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C17D72672D3EB33A00EC625D /* AHRijksMuseumUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AHRijksMuseumUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -53,11 +46,6 @@
 			path = AHRijksMuseumTests;
 			sourceTree = "<group>";
 		};
-		C17D726A2D3EB33A00EC625D /* AHRijksMuseumUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AHRijksMuseumUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,22 +63,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C17D72642D3EB33A00EC625D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		C17D723E2D3EB33700EC625D = {
 			isa = PBXGroup;
 			children = (
+				C12FC2632D41612C002CF995 /* AHRijksMuseum.xctestplan */,
 				C17D72492D3EB33700EC625D /* AHRijksMuseum */,
 				C17D72602D3EB33900EC625D /* AHRijksMuseumTests */,
-				C17D726A2D3EB33A00EC625D /* AHRijksMuseumUITests */,
 				C17D72482D3EB33700EC625D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -100,7 +81,6 @@
 			children = (
 				C17D72472D3EB33700EC625D /* AHRijksMuseum.app */,
 				C17D725D2D3EB33900EC625D /* AHRijksMuseumTests.xctest */,
-				C17D72672D3EB33A00EC625D /* AHRijksMuseumUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -155,29 +135,6 @@
 			productReference = C17D725D2D3EB33900EC625D /* AHRijksMuseumTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		C17D72662D3EB33A00EC625D /* AHRijksMuseumUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = C17D72782D3EB33A00EC625D /* Build configuration list for PBXNativeTarget "AHRijksMuseumUITests" */;
-			buildPhases = (
-				C17D72632D3EB33A00EC625D /* Sources */,
-				C17D72642D3EB33A00EC625D /* Frameworks */,
-				C17D72652D3EB33A00EC625D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				C17D72692D3EB33A00EC625D /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				C17D726A2D3EB33A00EC625D /* AHRijksMuseumUITests */,
-			);
-			name = AHRijksMuseumUITests;
-			packageProductDependencies = (
-			);
-			productName = AHRijksMuseumUITests;
-			productReference = C17D72672D3EB33A00EC625D /* AHRijksMuseumUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -194,10 +151,6 @@
 					C17D725C2D3EB33900EC625D = {
 						CreatedOnToolsVersion = 16.2;
 						LastSwiftMigration = 1620;
-						TestTargetID = C17D72462D3EB33700EC625D;
-					};
-					C17D72662D3EB33A00EC625D = {
-						CreatedOnToolsVersion = 16.2;
 						TestTargetID = C17D72462D3EB33700EC625D;
 					};
 				};
@@ -221,7 +174,6 @@
 			targets = (
 				C17D72462D3EB33700EC625D /* AHRijksMuseum */,
 				C17D725C2D3EB33900EC625D /* AHRijksMuseumTests */,
-				C17D72662D3EB33A00EC625D /* AHRijksMuseumUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -235,13 +187,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C17D725B2D3EB33900EC625D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		C17D72652D3EB33A00EC625D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -265,13 +210,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C17D72632D3EB33A00EC625D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -279,11 +217,6 @@
 			isa = PBXTargetDependency;
 			target = C17D72462D3EB33700EC625D /* AHRijksMuseum */;
 			targetProxy = C17D725E2D3EB33900EC625D /* PBXContainerItemProxy */;
-		};
-		C17D72692D3EB33A00EC625D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = C17D72462D3EB33700EC625D /* AHRijksMuseum */;
-			targetProxy = C17D72682D3EB33A00EC625D /* PBXContainerItemProxy */;
 		};
 		C17D727D2D3EB3BF00EC625D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -522,40 +455,6 @@
 			};
 			name = Release;
 		};
-		C17D72792D3EB33A00EC625D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8S669QNSJ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.alex.AHRijksMuseumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AHRijksMuseum;
-			};
-			name = Debug;
-		};
-		C17D727A2D3EB33A00EC625D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = H8S669QNSJ;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = org.alex.AHRijksMuseumUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AHRijksMuseum;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -582,15 +481,6 @@
 			buildConfigurations = (
 				C17D72762D3EB33A00EC625D /* Debug */,
 				C17D72772D3EB33A00EC625D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		C17D72782D3EB33A00EC625D /* Build configuration list for PBXNativeTarget "AHRijksMuseumUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				C17D72792D3EB33A00EC625D /* Debug */,
-				C17D727A2D3EB33A00EC625D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

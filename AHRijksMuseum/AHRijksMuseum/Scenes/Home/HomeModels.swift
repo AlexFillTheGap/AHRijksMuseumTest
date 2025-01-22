@@ -28,7 +28,7 @@ enum HomeLoadNextPage {
 
 enum HomeError {
     struct Response {
-        let error: NetworkError
+        let error: ArtServiceError
     }
 
     struct View {

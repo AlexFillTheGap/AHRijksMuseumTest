@@ -76,11 +76,14 @@ private enum ArtRoutes: NetworkRoute {
     }
 }
 
-enum ArtServiceError: LocalizedError {
+enum ArtServiceError: Error {
     case serverError
     case fetchListError
     case fetchDetailError
+    case unknown
+}
 
+extension ArtServiceError: LocalizedError {
     var errorDescription: String? {
         switch self {
         case .serverError:
@@ -89,6 +92,8 @@ enum ArtServiceError: LocalizedError {
             return String(localized: "error_description_fetch_list")
         case .fetchDetailError:
             return String(localized: "error_description_fetch_detail")
+        case .unknown:
+            return String(localized: "error_description_unknown")
         }
     }
 
@@ -100,6 +105,8 @@ enum ArtServiceError: LocalizedError {
             return String(localized: "error_reason_fetch_list")
         case .fetchDetailError:
             return String(localized: "error_reason_fetch_detail")
+        case .unknown:
+            return String(localized: "error_reason_unknown")
         }
     }
 
@@ -111,6 +118,8 @@ enum ArtServiceError: LocalizedError {
             return String(localized: "error_suggestion_fetch_list")
         case .fetchDetailError:
             return String(localized: "error_suggestion_fetch_detail")
+        case .unknown:
+            return String(localized: "error_suggestion_unknown")
         }
     }
 }

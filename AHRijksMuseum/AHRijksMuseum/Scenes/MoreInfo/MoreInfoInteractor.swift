@@ -31,10 +31,10 @@ actor MoreInfoInteractor: MoreInfoRequests, MoreInfoDataStore {
             let requestResult = try await artService.fetchArtDetail(artId: art.identifier)
             self.art = requestResult
             await responses.presentRemoteData(response: MoreInfoRemoteData.Response(artMoreInfo: requestResult))
-        } catch let error as NetworkError {
+        } catch let error as ArtServiceError {
             await responses.presentError(response: MoreInfoError.Response(error: error))
         } catch {
-            await responses.presentError(response: MoreInfoError.Response(error: NetworkError.connection))
+            await responses.presentError(response: MoreInfoError.Response(error: .unknown))
         }
     }
 

@@ -17,6 +17,7 @@ final class HomeViewController: UIViewController {
     private let loaderView = UIActivityIndicatorView.loaderView()
 
     private var collectionItems: [[ItemViewModel]] = []
+    private var loadingNextPage = false
 
     // MARK: Init
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
@@ -74,35 +75,29 @@ final class HomeViewController: UIViewController {
 
 extension HomeViewController: HomeView {
     func displayNewData(view: HomeLoadData.View) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.loaderView.isHidden = true
-            self.collectionItems.append(view.arts)
-            self.collectionView.reloadData()
-        }
+        loaderView.isHidden = true
+        collectionItems.append(view.arts)
+        collectionView.reloadData()
     }
 
     func displayNextPage(view: HomeLoadNextPage.View) {
-        DispatchQueue.main.async { [weak self] in
-            guard let self = self else { return }
-            self.collectionItems.append(view.arts)
-            self.collectionView.performBatchUpdates {
-                self.collectionView.insertSections([self.collectionItems.count - 1])
-            }
+        loadingNextPage = false
+        collectionItems.append(view.arts)
+        collectionView.performBatchUpdates {
+            self.collectionView.insertSections([self.collectionItems.count - 1])
         }
     }
 
     func displayError(view: HomeError.View) {
-        DispatchQueue.main.async {
-            self.loaderView.isHidden = true
-            let alertController = UIAlertController(
-                title: view.errorTitle,
-                message: view.errorMessage,
-                preferredStyle: .alert
-            )
-            alertController.addAction(UIAlertAction(title: String(localized: "home_error_ok_button"), style: .default))
-            self.present(alertController, animated: true)
-        }
+        loaderView.isHidden = true
+        loadingNextPage = false
+        let alertController = UIAlertController(
+            title: view.errorTitle,
+            message: view.errorMessage,
+            preferredStyle: .alert
+        )
+        alertController.addAction(UIAlertAction(title: String(localized: "home_error_ok_button"), style: .default))
+        present(alertController, animated: true)
     }
 }
 
@@ -169,16 +164,19 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
         }
     }
 
-    // With this method we can inspect the scroll possition on the collection and
-    // we can check if we are in the half of the content to try dowload extra pages.
+    // With this method we can inspect the scroll position on the collection and
+    // we can check if we are in the half of the content to try download extra pages.
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentHeight = scrollView.contentSize.height
         let contentYOffset = scrollView.contentOffset.y
 
         if contentYOffset > contentHeight / 2 {
             let interactor = requests
-            Task {
-                await interactor?.doLoadNextPage(request: HomeLoadNextPage.Request())
+            if !loadingNextPage {
+                loadingNextPage = true
+                Task {
+                    await interactor?.doLoadNextPage(request: HomeLoadNextPage.Request())
+                }
             }
         }
     }

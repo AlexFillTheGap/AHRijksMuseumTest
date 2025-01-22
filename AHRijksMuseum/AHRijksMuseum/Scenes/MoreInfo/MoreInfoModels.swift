@@ -28,7 +28,7 @@ enum MoreInfoRemoteData {
 
 enum MoreInfoError {
     struct Response {
-        let error: NetworkError
+        let error: ArtServiceError
     }
 
     struct View {

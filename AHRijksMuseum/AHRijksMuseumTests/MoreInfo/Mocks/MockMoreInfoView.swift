@@ -1,7 +1,6 @@
 @testable import AHRijksMuseum
 
 actor MockMoreInfoView: MoreInfoView {
-
     var displayLoadedDataView: MoreInfoInitialData.View?
     var displayRemoteDataView: MoreInfoRemoteData.View?
     var displayError: MoreInfoError.View?

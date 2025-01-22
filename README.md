@@ -23,8 +23,11 @@ This is because these are the classes that should contain the business logic and
 
 #### Dessign pattern.
 This project uses the VIP (View-Interactor-Presenter) design pattern. The main idea is that each scene of the application is developed by means of three specific classes, allowing all its functionalities to be implemented in an organised way:
+
     - V (View): manages everything related to the user interface, including the visual components and their layout. It is responsible for displaying information and responding to user interactions.
+    
     - I (Interactor): Handles the business logic of the scene. It communicates with other layers, such as the service layer or the data layer, to obtain information and sends it to the presenter.
+    
     - P (Presenter): Receives the data processed by the Interactor, transforms it as necessary and delivers it to the view for rendering. Any changes to the user interface must first go through the presenter.
 
 This pattern ensures a clear separation of responsibilities, facilitating code maintenance and scalability.

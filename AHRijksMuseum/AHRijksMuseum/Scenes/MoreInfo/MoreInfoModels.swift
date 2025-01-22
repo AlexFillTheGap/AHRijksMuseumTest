@@ -26,6 +26,17 @@ enum MoreInfoRemoteData {
     }
 }
 
+enum MoreInfoError {
+    struct Response {
+        let error: NetworkError
+    }
+
+    struct View {
+        let errorTitle: String
+        let errorMessage: String
+    }
+}
+
 struct MoreInfoLocalViewModel {
     let screenTitle: String
     let imageUrlString: String

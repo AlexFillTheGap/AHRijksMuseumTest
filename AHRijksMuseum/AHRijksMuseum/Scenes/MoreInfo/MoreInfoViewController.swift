@@ -3,6 +3,7 @@ import UIKit
 protocol MoreInfoView: Sendable {
     func displayLoadedData(view: MoreInfoInitialData.View) async
     func displayRemoteData(view: MoreInfoRemoteData.View) async
+    func displayError(view: MoreInfoError.View) async
 }
 
 class MoreInfoViewController: UIViewController {
@@ -109,6 +110,26 @@ extension MoreInfoViewController: MoreInfoView {
                 self.descriptionLabel.text = view.artViewModel.description
                 self.title = view.artViewModel.title
             }
+        }
+    }
+
+    func displayError(view: MoreInfoError.View) {
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(
+                title: view.errorTitle,
+                message: view.errorMessage,
+                preferredStyle: .alert
+            )
+            alertController.addAction(
+                UIAlertAction(
+                    title: String(localized: "moreInfo_error_ok_button"),
+                    style: .default,
+                    handler: { _ in
+                        self.navigationController?.popViewController(animated: true)
+                    }
+                )
+            )
+            self.present(alertController, animated: true)
         }
     }
 }

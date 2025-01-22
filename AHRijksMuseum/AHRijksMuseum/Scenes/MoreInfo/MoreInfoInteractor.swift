@@ -32,9 +32,9 @@ actor MoreInfoInteractor: MoreInfoRequests, MoreInfoDataStore {
             self.art = requestResult
             await responses.presentRemoteData(response: MoreInfoRemoteData.Response(artMoreInfo: requestResult))
         } catch let error as NetworkError {
-           // TODO: DISPLAY AN ERROR
+            await responses.presentError(response: MoreInfoError.Response(error: error))
         } catch {
-            print("an error happens during doLoadRemoteData method")
+            await responses.presentError(response: MoreInfoError.Response(error: NetworkError.connection))
         }
     }
 

@@ -7,6 +7,7 @@ protocol HomeRequests {
 
 protocol HomeDataStore: Actor {
     var arts: [[ArtHomeModel]] { get set }
+    func getArts() -> [[ArtHomeModel]]
 }
 
 actor HomeInteractor: HomeRequests, HomeDataStore {
@@ -52,5 +53,9 @@ actor HomeInteractor: HomeRequests, HomeDataStore {
         } catch {
             print("an error happens during doLoadNextPage method")
         }
+    }
+
+    func getArts() -> [[ArtHomeModel]] {
+        arts
     }
 }
